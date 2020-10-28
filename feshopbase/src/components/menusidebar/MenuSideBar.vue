@@ -16,7 +16,7 @@
           </h5>
         </div>
       </div>
-      <div class="sidebar-list">
+      <div class="sidebar-list" style="border-bottom:1px solid #ccc;">
         <ul class="lisst-unstyled components" style="padding:0; width=90%">
           <li
             class="active "
@@ -141,9 +141,9 @@ ul {
   width: 100%;
   bottom: 0;
   position: sticky;
-  bottom: 0;
-  border-top: 1px solid #8b8888;
-  padding-left: 5px;
+  /* /* bottom: 0; */
+  /* border-top: 1px solid #8b8888; */
+  padding: 0 0;
 }
 #sidebar,
 .wrapper {

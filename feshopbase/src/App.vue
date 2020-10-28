@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="menu fixed-top">
+    <div class="menu fixed-top" v-if="isActive">
       <MenuSideBar
         v-bind:menu="menu"
         v-bind:shopInfo="shopInfo"
@@ -8,14 +8,11 @@
         v-bind:listProducts="listProducts"
       ></MenuSideBar>
     </div>
-    <div class="content ">
-      <div class="container">
-        <router-view
-          @saveProduct="saveProduct"
-          v-bind:listProducts="listProducts"
-        ></router-view>
-      </div>
-    </div>
+
+    <router-view
+      @saveProduct="saveProduct"
+      v-bind:listProducts="listProducts"
+    ></router-view>
   </div>
 </template>
 
@@ -26,6 +23,7 @@ export default {
   name: "App",
   data() {
     return {
+      isActive: false,
       shopInfo: {
         name: "ShopBase",
         logo:
@@ -103,9 +101,23 @@ export default {
       this.listProducts.push(product);
     },
   },
+  created() {
+    console.log(this.$route.fullPath);
+  },
   components: {
     MenuSideBar,
     // ListProducts,
+  },
+  watch: {
+    $route: function() {
+      console.log(this.$route.fullPath);
+      console.log(this.$route.fullPath.lastIndexOf("/product/"));
+      if (this.$route.fullPath.lastIndexOf("/product/") == -1) {
+        this.isActive = true;
+      } else {
+        this.isActive = false;
+      }
+    },
   },
 };
 </script>
@@ -138,10 +150,10 @@ html {
 }
 #app .content {
   display: block;
-  width: 82% !important;
+  width: 82%;
   height: 100%;
   float: right;
-  border-right: 1px solid #8b8888;
+  /* border-right: 1px solid #8b8888; */
   overflow: scroll;
 }
 .container,

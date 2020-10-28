@@ -46,12 +46,14 @@
           @mouseenter="mouseActive(index)"
           @mouseleave="mouseNoActive()"
         ></a> -->
-        <router-link
-          :to="`/allproducts/${item.title}`"
-          class="view"
-          @mouseenter="mouseActive(index)"
-          @mouseleave="mouseNoActive()"
-          ><i class="fas fa-eye"></i
+
+        <router-link :to="`/product/${item.title}`" class="view "
+          ><div
+            class="hover"
+            @mouseenter="mouseActive(index)"
+            @mouseleave="mouseNoActive()"
+          >
+            <i class="fas fa-eye "></i></div
         ></router-link>
         <div class="image">
           <img :src="item.listPicture[0]" alt="" />
@@ -97,10 +99,9 @@ export default {
 </script>
 
 <style>
-img {
+.table-item img {
   width: 70px;
   height: 70px;
-  border: 1px solid #c51b1b;
 }
 .product-style {
   position: relative;
@@ -113,9 +114,14 @@ img {
   border-radius: 5px;
   padding: 2px 3px;
   color: rgb(237, 241, 241);
+  font-size: 15px;
 }
 .view {
   display: flex;
   align-items: center;
+}
+.hover {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 </style>

@@ -24,7 +24,7 @@ export default new Router({
       component: ListProducts 
     },
     {
-      path: "/allproducts/:id",
+      path: "/product/:id",
       name: "ViewProduct",
       component: ViewProduct 
     } ,

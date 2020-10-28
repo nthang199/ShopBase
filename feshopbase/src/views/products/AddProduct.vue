@@ -1,118 +1,125 @@
 <template>
-  <div class="add-product">
-    <router-link to="/allproducts">
-      <div v-bind:class="{ previous: product.title != '' }">
-        <i class="fas fa-caret-left"></i>
-        <!-- {{ $route.name }} -->
-        Products
-      </div>
-    </router-link>
-    <div>
-      <p class="title">{{ $route.name }}</p>
-    </div>
-    <div class="save-product" v-if="product.title != ''">
-      <div class="">
-        <div class="row">
-          <div class="col-2 save">
-            <div class="save-p">
-              <p>Unsave change</p>
-            </div>
+  <div class="content ">
+    <div class="container">
+      <div class="add-product">
+        <router-link to="/allproducts">
+          <div v-bind:class="{ previous: product.title != '' }">
+            <i class="fas fa-caret-left"></i>
+            <!-- {{ $route.name }} -->
+            Products
           </div>
-          <div class="col-6"></div>
-          <div class="col-2">
-            <a class="btn btn-default">Discard</a>
-          </div>
-          <div>
-            <a class="btn btn-primary" @click="saveProduct">Save changes</a>
-          </div>
+        </router-link>
+        <div>
+          <p class="title">{{ $route.name }}</p>
         </div>
-      </div>
-    </div>
-    <div class="info-product">
-      <div class="info-product-left">
-        <div class="block">
-          <div class="title-product ">
-            <h5>Title</h5>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="name product"
-              v-model="product.title"
-            />
-            <p>{{ product.title.length }} /255</p>
-          </div>
-          <div class="title-product">
-            <h5>Description</h5>
-            <textarea
-              type="text"
-              class="form-control"
-              rows="5"
-              placeholder="Description product"
-              v-model="product.description"
-            />
-
-            <p>{{ product.description.length }} /255</p>
-          </div>
-        </div>
-
-        <div class="image-product block">
-          <UploadImage @image="imageList"></UploadImage>
-        </div>
-        <div class="pricing block">
-          <h5>Spricing</h5>
-          <Pricing
-            @updatePriceSale="updatePriceSale"
-            @updatePrice="updatePrice"
-            @updatePricePerItem="updatePricePerItem"
-          ></Pricing>
-        </div>
-        <div class="inventory block">
-          <h5>Inventory</h5>
-          <div class="row">
-            <div
-              class="col-6"
-              v-for="(item, index) in typeInventory"
-              :key="index"
-            >
-              <Inventory
-                @updatePrice="updatePrice"
-                :typeInventory="item"
-                :indexoption="index"
-                :optionPolicy="optionPolicy"
-              ></Inventory>
-            </div>
+        <div class="save-product" v-if="product.title != ''">
+          <div class="">
             <div class="row">
-              <div class="checkbox col-12">
-                <label
-                  ><input type="checkbox" />
-                  Allow customers to purchase this product when it's out of
-                  stock
-                </label>
+              <div class="col-2 save">
+                <div class="save-p">
+                  <p>Unsave change</p>
+                </div>
+              </div>
+              <div class="col-6"></div>
+              <div class="col-2">
+                <a class="btn btn-default">Discard</a>
+              </div>
+              <div>
+                <a class="btn btn-primary" @click="saveProduct">Save changes</a>
               </div>
             </div>
           </div>
         </div>
-        <div class="shipping block">
-          <h5>Shipping</h5>
-          <Shipping></Shipping>
-        </div>
-        <div class="variant block">
-          <div class="list-variant">
-            <Variant class="padding" @getListVariant="getListVariant"></Variant>
-          </div>
-        </div>
-      </div>
+        <div class="info-product">
+          <div class="info-product-left">
+            <div class="block">
+              <div class="title-product ">
+                <h5>Title</h5>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="name product"
+                  v-model="product.title"
+                />
+                <p>{{ product.title.length }} /255</p>
+              </div>
+              <div class="title-product">
+                <h5>Description</h5>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  rows="5"
+                  placeholder="Description product"
+                  v-model="product.description"
+                />
 
-      <div class="info-product-right">
-        <div class="block">
-          <ProductAvailability></ProductAvailability>
-        </div>
-        <div class="block">
-          <Organization
-            @getCollection="getCollection"
-            @updateVendor="updateVendor"
-            @updateProductType="updateProductType"
-          ></Organization>
+                <p>{{ product.description.length }} /255</p>
+              </div>
+            </div>
+
+            <div class="image-product block">
+              <UploadImage @image="imageList"></UploadImage>
+            </div>
+            <div class="pricing block">
+              <h5>Spricing</h5>
+              <Pricing
+                @updatePriceSale="updatePriceSale"
+                @updatePrice="updatePrice"
+                @updatePricePerItem="updatePricePerItem"
+              ></Pricing>
+            </div>
+            <div class="inventory block">
+              <h5>Inventory</h5>
+              <div class="row">
+                <div
+                  class="col-6"
+                  v-for="(item, index) in typeInventory"
+                  :key="index"
+                >
+                  <Inventory
+                    @updatePrice="updatePrice"
+                    :typeInventory="item"
+                    :indexoption="index"
+                    :optionPolicy="optionPolicy"
+                  ></Inventory>
+                </div>
+                <div class="row">
+                  <div class="checkbox col-12">
+                    <label
+                      ><input type="checkbox" />
+                      Allow customers to purchase this product when it's out of
+                      stock
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="shipping block">
+              <h5>Shipping</h5>
+              <Shipping></Shipping>
+            </div>
+            <div class="variant block">
+              <div class="list-variant">
+                <Variant
+                  class="padding"
+                  @getListVariant="getListVariant"
+                ></Variant>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-product-right">
+            <div class="block">
+              <ProductAvailability></ProductAvailability>
+            </div>
+            <div class="block">
+              <Organization
+                @getCollection="getCollection"
+                @updateVendor="updateVendor"
+                @updateProductType="updateProductType"
+              ></Organization>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,8 +1,12 @@
 <template>
-  <div id="list-products">
-    <Header></Header>
+  <div class="content ">
+    <div class="container">
+      <div id="list-products">
+        <Header></Header>
 
-    <ItemProduct :listProducts="listProducts"></ItemProduct>
+        <ItemProduct :listProducts="listProducts"></ItemProduct>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -43,6 +47,14 @@ export default {
     // saveProduct(product) {
     //   //
     //   console.log("done", product);
+    // },
+    // disableMenu() {
+    //   // this.$emit("disableMenu");
+    //   if (this.$route.fullPath.lastIndexOf("/product/") != 0) {
+    //     this.$emit("disableMenu", false);
+    //   } else {
+    //     this.$emit("disableMenu", true);
+    //   }
     // },
   },
   created() {
