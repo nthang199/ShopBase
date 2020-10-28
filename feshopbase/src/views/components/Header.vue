@@ -15,7 +15,7 @@
         <button type="button" class="btn btn-primary">Add from Services</button>
       </div>
       <div class="col-2 btn-customize">
-        <router-link to="/allproducts/add" v-bind:parentmenu="parentmenu"
+        <router-link to="/addproducts"
           ><button type="button" class="btn btn-primary">
             Add Products
           </button></router-link
@@ -85,12 +85,7 @@
 <script>
 export default {
   name: "header",
-  props: {
-    parentmenu: {
-      type: Number,
-      default: 1,
-    },
-  },
+  props: {},
   data() {
     return {};
   },

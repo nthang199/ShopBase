@@ -5,11 +5,15 @@
         v-bind:menu="menu"
         v-bind:shopInfo="shopInfo"
         v-on:titlemenu="titlemenu"
+        v-bind:listProducts="listProducts"
       ></MenuSideBar>
     </div>
     <div class="content ">
       <div class="container">
-        <router-view></router-view>
+        <router-view
+          @saveProduct="saveProduct"
+          v-bind:listProducts="listProducts"
+        ></router-view>
       </div>
     </div>
   </div>
@@ -78,11 +82,25 @@ export default {
           submenu: [{ icon: "", title: "Themes", path: "/allproducts" }],
         },
       ],
+      listProducts: [
+        {
+          title: "test",
+          type: "test",
+          vendor: "test",
+          listPicture: [
+            "https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg",
+          ],
+        },
+      ],
     };
   },
   methods: {
     titlemenu(index) {
       return this.menu[index].title;
+    },
+    saveProduct(product) {
+      // console.log("done", product);
+      this.listProducts.push(product);
     },
   },
   components: {

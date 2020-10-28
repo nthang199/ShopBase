@@ -23,7 +23,7 @@
             <a class="btn btn-default">Discard</a>
           </div>
           <div>
-            <a class="btn btn-primary" @click="saveChange">Save changes</a>
+            <a class="btn btn-primary" @click="saveProduct">Save changes</a>
           </div>
         </div>
       </div>
@@ -60,16 +60,6 @@
         </div>
         <div class="pricing block">
           <h5>Spricing</h5>
-          <!-- <div class="row">
-            <div class="col-6" v-for="(item, index) in typePrice" :key="index">
-              <Pricing
-                :price="price"
-                :typePrice="item"
-                :index="index"
-                @updatePrice="updatePrice"
-              ></Pricing>
-            </div>
-          </div> -->
           <Pricing
             @updatePriceSale="updatePriceSale"
             @updatePrice="updatePrice"
@@ -226,7 +216,7 @@ export default {
     updateProductType(event) {
       this.product.type = event.target.value;
     },
-    saveChange() {
+    saveProduct() {
       this.$emit("saveProduct", this.product);
     },
   },

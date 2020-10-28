@@ -89,7 +89,7 @@
 
 <script>
 export default {
-  name: "menu",
+  name: "menusidebar",
   props: {
     menu: {
       type: Array,
@@ -99,6 +99,7 @@ export default {
       type: Object,
       default: null,
     },
+    listProducts: Array,
   },
   data() {
     return {
@@ -112,9 +113,11 @@ export default {
         this.menuActive = index;
         this.submenuActive = 0;
       }
+      // console.log(this.listProducts.length);
       // this.$emit("titlemenu", this.menu[index]);
     },
     setSubmenuActive(indexsubmenu) {
+      // console.log(this.listProducts.length);
       this.submenuActive = indexsubmenu;
     },
   },
