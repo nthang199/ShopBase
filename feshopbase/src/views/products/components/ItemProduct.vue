@@ -36,7 +36,7 @@
           />
         </div>
         <div class="product-name">
-          <p>{{product.title}}</p>
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
         </div>
       </div>
       <div class="col-2">

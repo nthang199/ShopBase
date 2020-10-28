@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <nav id="sidebar">
-      <div class="sidebar-header">
+      <div class="sidebar-header ">
         <div class="row">
           <div class="col-9">
             <img v-bind:src="shopInfo.logo" alt="" />
@@ -19,7 +19,7 @@
       <div class="sidebar-list">
         <ul class="lisst-unstyled components" style="padding:0; width=90%">
           <li
-            class="active"
+            class="active "
             v-for="(itemmenu, index) in menu"
             v-bind:key="index"
             @click="activeMenu(index)"
@@ -52,7 +52,7 @@
                 >
                   <div class="row">
                     <router-link
-                      class="col-12"
+                      class=" col-12"
                       v-bind:class="{
                         submenubg: indexsubmenu == submenuActive,
                       }"
