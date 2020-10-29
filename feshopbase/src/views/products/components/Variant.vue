@@ -41,6 +41,7 @@
             placeholder="Separate options with comma"
             v-model="optionItem.value"
             @change="getListVariant()"
+            @input="getListVariant()"
           />
           <!-- <div class="tag">
             a
@@ -145,26 +146,36 @@ export default {
       }
     },
     getListVariant() {
+      this.$emit("getOptions", this.variant);
       this.option = [];
       this.variantList = [];
       for (let i = 0; i < this.variant.length; i++) {
         if (this.variant[i].value != "") {
           this.option.push(this.variant[i].value.split(","));
+          for (let index = 0; index < this.option.length; index++) {
+            for (let z = 0; z < this.option[index].length; z++) {
+              if (this.option[index][z] == "") {
+                this.option[index].splice(z, 1);
+              }
+            }
+            // console.log(this.option[index]);
+          }
         }
       }
-      console.log(this.option);
       const cartesian = (...a) =>
         a.reduce((a, b) => a.flatMap((d) => b.map((e) => [d, e].flat())));
       if (this.option.length == 1) {
         let output = this.option[0];
         for (let j = 0; j < output.length; j++) {
-          this.variantList.push({
-            check: "true",
-            variant: output[j],
-            price: 0,
-            SKU: "",
-            Barcode: "",
-          });
+          if (output[j] != "") {
+            this.variantList.push({
+              check: "true",
+              variant: output[j],
+              price: 0,
+              SKU: "",
+              Barcode: "",
+            });
+          }
         }
       } else {
         let output = cartesian(...this.option);

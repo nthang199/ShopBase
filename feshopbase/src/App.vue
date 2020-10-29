@@ -23,7 +23,7 @@ export default {
   name: "App",
   data() {
     return {
-      isActive: false,
+      isActive: true,
       shopInfo: {
         name: "ShopBase",
         logo:
@@ -80,16 +80,7 @@ export default {
           submenu: [{ icon: "", title: "Themes", path: "/allproducts" }],
         },
       ],
-      listProducts: [
-        {
-          title: "test",
-          type: "test",
-          vendor: "test",
-          listPicture: [
-            "https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg",
-          ],
-        },
-      ],
+      listProducts: [],
     };
   },
   methods: {
@@ -97,7 +88,6 @@ export default {
       return this.menu[index].title;
     },
     saveProduct(product) {
-      // console.log("done", product);
       this.listProducts.push(product);
     },
   },

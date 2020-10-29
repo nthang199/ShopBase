@@ -55,7 +55,7 @@
           >
             <i class="fas fa-eye "></i></div
         ></router-link>
-        <div class="image">
+        <div>
           <img :src="item.listPicture[0]" alt="" />
         </div>
         <div class="product-name">
@@ -102,6 +102,7 @@ export default {
 .table-item img {
   width: 70px;
   height: 70px;
+  margin: 0px 5px;
 }
 .product-style {
   position: relative;

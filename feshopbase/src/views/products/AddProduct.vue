@@ -103,6 +103,7 @@
                 <Variant
                   class="padding"
                   @getListVariant="getListVariant"
+                  @getOptions="getOptions"
                 ></Variant>
               </div>
             </div>
@@ -193,23 +194,30 @@ export default {
     updatePriceSale(price) {
       if (!isNaN(parseInt(price))) {
         this.product.priceSale = parseInt(price);
-        // console.log(this.product.price);
       }
     },
     updatePrice(price) {
       if (!isNaN(parseInt(price))) {
         this.product.price = parseInt(price);
-        // console.log(this.product.price);
       }
     },
     updatePricePerItem(price) {
       if (!isNaN(parseInt(price))) {
         this.product.pricePerItem = parseInt(price);
-        // console.log(this.product.price);
+      }
+    },
+    filterOptions(string) {
+      return string != "";
+    },
+    getOptions(options) {
+      this.product.options = [];
+      for (let i = 0; i < options.length; i++) {
+        let valueTemp = options[i].value.split(",");
+        let arr = valueTemp.filter(this.filterOptions);
+        this.product.options.push({ name: options[i].name, value: arr });
       }
     },
     getListVariant(variantList) {
-      this.product.variant = [];
       this.product.variant = variantList;
     },
     getCollection(collection, vendor) {
@@ -278,21 +286,14 @@ export default {
 .btn-primary {
   color: white !important;
 }
-/*
-.save-p {
-  display: flex;
-  justify-items: center;
-  align-content: center;
-} */
+
 .add-product .row {
   margin: 0;
 }
 .add-product .row .col-7 {
   border: 1px solid gray;
 }
-/* .add-product .row .col-1 {
-  border: 1px solid gray;
-} */
+
 .add-product .row .col-4 {
   border: 1px solid gray;
 }
@@ -336,5 +337,4 @@ export default {
   text-decoration: underline;
   color: #1098f3;
 }
-/*  info-product-right */
 </style>
