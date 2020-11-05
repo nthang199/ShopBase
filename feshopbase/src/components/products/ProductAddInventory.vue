@@ -2,9 +2,7 @@
   <div class="inventory-type">
     <p>{{ typeInventory }}</p>
     <div class="input-group ">
-      <div class="input-group-prepend">
-        <!-- <span class="input-group-text">USD</span> -->
-      </div>
+      <div class="input-group-prepend"></div>
       <input
         v-if="indexoption != 2"
         type="text"

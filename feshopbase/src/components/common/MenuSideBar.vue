@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <nav id="sidebar">
-      <div class="sidebar-header ">
+      <div class="sidebar-header">
         <div class="row">
           <div class="col-9">
             <img v-bind:src="shopInfo.logo" alt="" />
@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="sidebar-list" style="border-bottom:1px solid #ccc;">
-        <ul class="lisst-unstyled components" style="padding:0; width=90%">
+        <ul class="list-unstyled components" style="padding:0; ">
           <li
             class="active "
             v-for="(itemmenu, index) in menu"
@@ -25,15 +25,14 @@
             @click="activeMenu(index)"
           >
             <div class="row itemparentmenu">
-              <a v-bind:href="'#' + itemmenu.title" class="col-1"
-                ><i class="fas fa-home"></i
-              ></a>
-              <router-link
-                v-bind:to="itemmenu.path"
-                data-toggle="collapse"
-                aria-expanded="false"
-                class="col-9"
-                >{{ itemmenu.title }}</router-link
+              <span
+                ><router-link
+                  v-bind:to="itemmenu.path"
+                  data-toggle="collapse"
+                  aria-expanded="false"
+                  ><span class="col-1" v-html="itemmenu.icon"></span>
+                  <span> {{ itemmenu.title }}</span></router-link
+                ></span
               >
             </div>
             <div
@@ -60,7 +59,6 @@
                       v-bind:to="itemsubmenu.path"
                       data-toggle="collapse"
                       aria-expanded="false"
-                      style=""
                       >{{ itemsubmenu.title }}</router-link
                     >
                   </div>
@@ -70,16 +68,20 @@
           </li>
         </ul>
       </div>
-      <div class="sidebar-footer fixed-bottom">
+      <div class="sidebar-footer " @click="popupForm">
         <div class="sidebar-footer-info">
-          <div class="row">
-            <div class="col-3">
-              <a href="#"><i class="far fa-user"></i></a>
-            </div>
-            <div class="col-9">
-              <p>User name</p>
-              <p>User name</p>
-            </div>
+          <span class="sidebar-footer-info-left"
+            ><img
+              class="img-circle"
+              src="https://admin-cdn.shopbase.com/28891e5300/img/avatar-default.06c91d5e.svg"
+              alt=""
+          /></span>
+          <span class="sidebar-footer-info-right">
+            <p>ten</p>
+            <p>email</p>
+          </span>
+          <div class="infor-user" v-if="inforActive">
+            <MenuSideBarInfor></MenuSideBarInfor>
           </div>
         </div>
       </div>
@@ -88,6 +90,7 @@
 </template>
 
 <script>
+import MenuSideBarInfor from "./components/MenuSideBarInfor";
 export default {
   name: "menusidebar",
   props: {
@@ -105,6 +108,7 @@ export default {
     return {
       menuActive: 0,
       submenuActive: 0,
+      inforActive: false,
     };
   },
   methods: {
@@ -120,53 +124,87 @@ export default {
       // console.log(this.listProducts.length);
       this.submenuActive = indexsubmenu;
     },
+    popupForm() {
+      this.inforActive = !this.inforActive;
+    },
   },
   computed: {},
+  components: { MenuSideBarInfor },
 };
 </script>
 
 <style>
+#sidebar,
+.wrapper {
+  height: 100%;
+}
 ul {
   text-align: left;
   padding: 0;
 }
 .sidebar-header {
-  height: 25%;
+  height: 22%;
   width: 100%;
   border-bottom: 1px solid #8b8888;
-  padding: 15%;
+  padding: 25% 20%;
 }
 .sidebar-footer {
-  height: 10%;
+  height: 15%;
   width: 100%;
   bottom: 0;
-  position: sticky;
-  /* /* bottom: 0; */
-  /* border-top: 1px solid #8b8888; */
   padding: 0 0;
+  margin: 0;
 }
-#sidebar,
-.wrapper {
-  height: 100%;
+.sidebar-footer-info {
+  margin: 0 15%;
+  margin-top: 10%;
+}
+.sidebar-footer-info-left {
+  float: left;
+  padding-right: 8px;
+}
+.sidebar-footer-info-left img {
+  padding: 5px;
+  border-radius: 10px !important;
+}
+.sidebar-footer-info-left p {
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+}
+.sidebar-footer-info-right {
+}
+.sidebar-footer-info-right p {
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+}
+.infor-user {
+  position: fixed;
+  bottom: 4%;
+  left: 16%;
 }
 .sidebar-list {
-  height: 65%;
+  height: 63%;
   overflow-y: scroll !important;
   overflow-x: hidden;
-  padding: 10% 0;
+  padding: 5% 0;
   display: flex;
   align-content: center;
   justify-content: center;
 }
-.fixed-bottom,
+.mdi {
+  text-align: center !important;
+}
+.list-unstyled {
+  width: 80%;
+}
+
 .fixed-top {
   width: 19%;
 }
 ul {
   list-style: none;
-}
-.fixed-bottom {
-  position: relative;
 }
 .parentmenu:hover .submenu ul {
   display: block;
@@ -177,10 +215,10 @@ ul {
 .row a,
 .row a:hover,
 .row a:active {
-  font-size: 18px;
+  font-size: 16px;
   color: #5b676e;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 550;
 }
 .submenu {
   margin: 0px auto !important;
@@ -198,6 +236,7 @@ ul {
   font-size: 16px;
   font-weight: normal;
   color: #5b676e;
+  padding-left: 5px;
 }
 .submenu li:hover a {
   background-color: #dfd9d9;
@@ -220,26 +259,5 @@ ul {
 .submenubg {
   background-color: rgb(98, 208, 241);
   border-radius: 5px;
-}
-.sidebar-footer-info {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  padding: 5%;
-}
-.sidebar-footer-info .row {
-  width: 70%;
-}
-.sidebar-footer-info .col-3 a i {
-  font-size: 20px;
-}
-.sidebar-footer-info .col-3 {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-}
-.sidebar-footer-info .col-9 p {
-  margin: 0;
-  font-size: 15px;
 }
 </style>

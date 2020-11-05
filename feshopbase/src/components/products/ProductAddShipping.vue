@@ -10,9 +10,7 @@
     </div>
     <div class="row">
       <div class="input-group ">
-        <div class="input-group-prepend">
-          <!-- <span class="input-group-text">USD</span> -->
-        </div>
+        <div class="input-group-prepend"></div>
         <input
           type="text"
           class="form-control col-4"

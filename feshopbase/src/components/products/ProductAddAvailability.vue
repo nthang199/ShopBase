@@ -5,7 +5,7 @@
     <div class="check-box ">
       <div class="">
         <label for="s-checkbos" class="checkbox">
-          <input type="checkbox" name="" id="" />
+          <input type="checkbox" class="check" name="" id="" />
         </label>
       </div>
       <div class="caption">
@@ -17,7 +17,7 @@
     <div class="check-box ">
       <div class="">
         <label for="s-checkbos" class="checkbox">
-          <input type="checkbox" name="" id="" />
+          <input type="checkbox" class="check" name="" id="" />
         </label>
       </div>
       <div class="caption">
@@ -35,6 +35,7 @@ export default {
   data() {
     return {};
   },
+  methods: {},
 };
 </script>
 
@@ -48,5 +49,8 @@ export default {
 }
 .caption p {
   font-size: 13px;
+}
+.check {
+  transform: scale(1.2);
 }
 </style>

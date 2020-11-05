@@ -17,22 +17,27 @@
 </template>
 
 <script>
-import MenuSideBar from "./components/menusidebar/MenuSideBar.vue";
+import MenuSideBar from "./components/common/MenuSideBar";
 // import ListProducts from "./views/products/ListProducts";
 export default {
   name: "App",
   data() {
     return {
-      isActive: true,
+      isActive: null,
       shopInfo: {
         name: "ShopBase",
         logo:
           "https://admin-cdn.shopbase.com/ea1df11279/img/Compact.ac400184.svg",
       },
       menu: [
-        { icon: "", title: "Home", path: "/allproducts", submenu: [] },
         {
-          icon: "",
+          icon: '<i class="mdi mdi-home mdi-24px"></i>',
+          title: "Home",
+          path: "/allproducts",
+          submenu: [],
+        },
+        {
+          icon: '<i class="mdi mdi-clipboard-text mdi-24px"></i>',
           title: "Orders",
           path: "/allproducts",
           submenu: [
@@ -41,7 +46,7 @@ export default {
           ],
         },
         {
-          icon: "",
+          icon: '<i class="mdi mdi-tag-multiple mdi-24px"></i>',
           title: "Products",
           path: "/allproducts",
           submenu: [
@@ -52,9 +57,21 @@ export default {
             { icon: "", title: "Bulk updates", path: "/bulk-updates" },
           ],
         },
-        { icon: "", title: "Analytics", path: "/allproducts", submenu: [] },
         {
-          icon: "",
+          icon: '<i class="mdi mdi-signal-cellular-3 mdi-24px"></i>',
+          title: "Analytics",
+          path: "/allproducts/tab-all",
+          submenu: [],
+        },
+
+        {
+          icon: '<i class="mdi mdi-folder-account mdi-24px"></i>',
+          title: "Customers",
+          path: "/allproducts",
+          submenu: [],
+        },
+        {
+          icon: '<i class="mdi mdi-ticket-percent mdi-24px"></i>',
           title: "Discounts",
           path: "/allproducts",
           submenu: [
@@ -64,7 +81,7 @@ export default {
         },
 
         {
-          icon: "",
+          icon: '<i class="mdi mdi-puzzle mdi-24px"></i>',
           title: "Apps",
           path: "/allproducts",
           submenu: [
@@ -72,15 +89,47 @@ export default {
             { icon: "", title: "Abandoned checkouts", path: "/allproducts" },
           ],
         },
-        { icon: "", title: "Settings", path: "/allproducts", submenu: [] },
         {
-          icon: "",
+          icon: '<i class= "mdi mdi-store mdi-24px"></i>',
+          title: "Settings",
+          path: "/allproducts",
+          submenu: [],
+        },
+        {
+          icon: '<i class= "mdi mdi-store mdi-24px"></i>',
           title: "Online Store",
           path: "/allproducts",
           submenu: [{ icon: "", title: "Themes", path: "/allproducts" }],
         },
       ],
-      listProducts: [],
+      listProducts: [
+        {
+          slug: "",
+          title: "Product1",
+          description: "Product1",
+          type: "Product1",
+          options: [
+            { name: "Size", value: ["s", "m", "l"] },
+            { name: "Color", value: ["red", "green", "blue"] },
+          ],
+          variant: [],
+          image: [
+            "https://img.crocdn.co.uk/images/products2/pl/20/00/02/16/pl2000021685.jpg",
+            "https://img.crocdn.co.uk/images/products2/pl/20/00/02/16/pl2000021685.jpg",
+            "https://img.crocdn.co.uk/images/products2/pl/20/00/02/16/pl2000021685.jpg",
+          ],
+          listPicture: [
+            "https://img.crocdn.co.uk/images/products2/pl/20/00/02/16/pl2000021685.jpg",
+            "https://img.crocdn.co.uk/images/products2/pl/20/00/02/16/pl2000021685.jpg",
+            "https://img.crocdn.co.uk/images/products2/pl/20/00/02/16/pl2000021685.jpg",
+          ],
+          priceSale: 0,
+          price: 0,
+          pricePerItem: 0,
+          collection: [],
+          vendor: "",
+        },
+      ],
     };
   },
   methods: {
@@ -92,16 +141,17 @@ export default {
     },
   },
   created() {
-    console.log(this.$route.fullPath);
+    if (this.$route.fullPath.lastIndexOf("/product/") == -1) {
+      this.isActive = true;
+    } else {
+      this.isActive = false;
+    }
   },
   components: {
     MenuSideBar,
-    // ListProducts,
   },
   watch: {
     $route: function() {
-      console.log(this.$route.fullPath);
-      console.log(this.$route.fullPath.lastIndexOf("/product/"));
       if (this.$route.fullPath.lastIndexOf("/product/") == -1) {
         this.isActive = true;
       } else {
@@ -133,14 +183,13 @@ html {
 }
 #app .menu {
   display: block;
-  width: 18% !important;
+  width: 19% !important;
   height: 100%;
-
   border-right: 1px solid #8b8888;
 }
 #app .content {
   display: block;
-  width: 82%;
+  width: 81%;
   height: 100%;
   float: right;
   /* border-right: 1px solid #8b8888; */
@@ -153,17 +202,14 @@ html {
 .container-xl {
   width: 100%;
   height: 100%;
-  padding-right: 40px !important;
-  padding-left: 40px !important;
-  margin: 3% 25%;
+  /* padding-right: 55px !important;
+  padding-left: 55px !important; */
+  padding: 0 5% !important;
+  margin: 5% 26%;
 }
 .row {
   display: flex;
   align-content: center;
   justify-items: center;
-}
-.title {
-  font-size: 30px;
-  font-weight: bold;
 }
 </style>

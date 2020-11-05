@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="variant-header">
+    <div class="add-variant">
       <div class="row">
         <h5 class="col-6">Variant</h5>
-        <a class="col-6" @click="addVariant1" v-if="variant.length == 0"
+        <a class="col-6 " @click="addVariant1" v-if="variant.length == 0"
           ><p>Add variant</p></a
         >
         <a class="col-6" @click="cancelVariant" v-if="variant.length > 0"
@@ -206,28 +206,31 @@ export default {
 .col-1 .form-control {
   border: none !important;
 }
-.variant {
-  margin: 10px 0px;
-}
-.btn-add {
-  margin: 30px 0px;
-}
-.btn-add a {
-  margin: 20px 0px;
-  border: 1px solid #8b8888;
-  padding: 5px 10px;
+
+.add-variant a p {
+  cursor: pointer;
   border-radius: 5px;
+  color: #0093ed !important;
 }
 .option-list {
   margin: 15px 0px !important;
 }
+.btn-add {
+  margin: 20px 0px;
+}
+.btn-add a {
+  padding: 8px 15px;
+  background: linear-gradient(
+    -180deg,
+    rgba(130, 134, 158, 0.05),
+    rgba(85, 88, 108, 0.05) 97%
+  );
+  border: 1px solid #8b8888;
+  border-radius: 5px;
+}
 .btn-add a:hover,
 .btn-add a:active {
-  /* margin: 20px 0px;
-  border: 1px solid #8b8888;
-  padding: 5px 10px;
-  border-radius: 5px; */
-  background-color: rgb(209, 208, 207);
+  background-color: rgb(230, 230, 230);
 }
 .variant-list-header .form-control {
   width: 90% !important;

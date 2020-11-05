@@ -6,9 +6,9 @@ import Router from "vue-router";
 
 
 
-import ListProducts from "../views/products/ListProducts.vue"
-import AddProduct from "../views/products/AddProduct.vue"
-import ViewProduct from "../views/products/ViewProduct.vue"
+import Dashboard from "../views/products/Dashboard.vue"
+import Add from "../views/products/Add.vue"
+import Details from "../views/products/Details.vue"
 Vue.use(Router);
 
 export default new Router({
@@ -16,44 +16,59 @@ export default new Router({
     {
       path: "/",
       name: "Products",
-      component: ListProducts
+      component: Dashboard
     },
     {
-      path: "/allproducts",
-      name: "List Products",
-      component: ListProducts 
+      path: "/allproducts/",
+      name: "Dashboard",
+      component: Dashboard 
     },
     {
       path: "/product/:id",
-      name: "ViewProduct",
-      component: ViewProduct 
+      name: "Details",
+      component: Details 
     } ,
     {
       path: "/addproducts",
-      name: "Add Product",
-      component: AddProduct
+      name: "Add product",
+      component: Add
     },
     {
       path: "/collectios",
-      name: "ListProducts",
-      component: ListProducts
+      name: "Dashboard",
+      component: Dashboard
     }
     ,
     {
       path: "/inventory",
-      name: "Products",
-      component: ListProducts
+      name: "Dashboard",
+      component: Dashboard
     }
     ,
     {
       path: "/product-feeds",
-      name: "Products",
-      component: ListProducts
+      name: "Dashboard",
+      component: Dashboard
     }   ,
     {
       path: "/bulk-updates",
-      name: "Products",
-      component: ListProducts
+      name: "Dashboard",
+      component: Dashboard
+    },
+    {
+      path: '/allproducts/tab-all',
+      name: 'ProductDashboardTab-All',
+      component: Dashboard
+    },
+    {
+      path: '/allproducts/tab-published',
+      name: 'ProductDashboardTab-Published',
+      component: Dashboard
+    },
+    {
+      path: '/allproducts/tab-unpublished',
+      name: 'ProductDashboardTab-Unpublished',
+      component: Dashboard
     }
   ]
 });

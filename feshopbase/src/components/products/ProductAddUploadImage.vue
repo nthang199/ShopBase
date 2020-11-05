@@ -1,6 +1,6 @@
 <template>
   <div class="upload-iamge">
-    <div style="margin:0 20px">
+    <div>
       <h5>Image ({{ images.length }}/250)</h5>
       <div class="upload">
         <input
@@ -87,7 +87,7 @@ export default {
 }
 .center {
   display: flex;
-  padding-top: 90px;
+  padding-top: 100px;
   align-items: center;
   justify-content: center;
 }
@@ -99,7 +99,7 @@ export default {
 .upload {
   float: right;
 }
-.col-3 {
+.upload-iamge .col-3 {
   padding: 2px 2px !important;
   margin: 0px;
   width: 25%;
@@ -124,10 +124,10 @@ export default {
   margin: 10px;
 }
 .choosefile {
-  color: rgb(27, 198, 228);
+  color: #0093ed;
 }
 .choosefile:hover {
   text-decoration: underline;
-  color: rgb(27, 198, 228);
+  color: #0093ed;
 }
 </style>

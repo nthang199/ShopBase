@@ -3,8 +3,11 @@ import App from './App.vue'
 import router from "./router";
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import AOS from "aos";
+// import Vuetify from 'vuetify/lib'
+// Vue.use(Vuetify);
 Vue.use( CKEditor );
 import "aos/dist/aos.css";
+import '@mdi/font/css/materialdesignicons.css' 
 import "bootstrap";
 import "jquery";
 import "bootstrap/dist/css/bootstrap.min.css";

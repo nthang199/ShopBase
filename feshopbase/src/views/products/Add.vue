@@ -2,34 +2,38 @@
   <div class="content ">
     <div class="container">
       <div class="add-product">
-        <router-link to="/allproducts">
-          <div v-bind:class="{ previous: product.title != '' }">
-            <i class="fas fa-caret-left"></i>
-            <!-- {{ $route.name }} -->
-            Products
-          </div>
-        </router-link>
-        <div>
-          <p class="title">{{ $route.name }}</p>
-        </div>
         <div class="save-product" v-if="product.title != ''">
           <div class="">
             <div class="row">
-              <div class="col-2 save">
+              <div class="col-3 save">
                 <div class="save-p">
                   <p>Unsave change</p>
                 </div>
               </div>
-              <div class="col-6"></div>
+              <div class="col-5"></div>
               <div class="col-2">
                 <a class="btn btn-default">Discard</a>
               </div>
               <div>
-                <a class="btn btn-primary" @click="saveProduct">Save changes</a>
+                <a class="btn btn-save" @click="saveProduct">Save changes</a>
               </div>
             </div>
           </div>
         </div>
+        <div class="add-product-header">
+          <div class="add-product-back">
+            <router-link to="/allproducts">
+              <div>
+                <span> <i class="fas fa-caret-left"></i></span>
+                <span>Products</span>
+              </div>
+            </router-link>
+          </div>
+          <div>
+            <h1 class="title">{{ $route.name }}</h1>
+          </div>
+        </div>
+
         <div class="info-product">
           <div class="info-product-left">
             <div class="block">
@@ -41,7 +45,7 @@
                   placeholder="name product"
                   v-model="product.title"
                 />
-                <p>{{ product.title.length }} /255</p>
+                <p class="header-title-des">{{ product.title.length }} /255</p>
               </div>
               <div class="title-product">
                 <h5>Description</h5>
@@ -52,21 +56,19 @@
                   placeholder="Description product"
                   v-model="product.description"
                 />
-
-                <p>{{ product.description.length }} /255</p>
               </div>
             </div>
 
             <div class="image-product block">
-              <UploadImage @image="imageList"></UploadImage>
+              <ProductAddUploadImage @image="imageList"></ProductAddUploadImage>
             </div>
             <div class="pricing block">
               <h5>Spricing</h5>
-              <Pricing
+              <ProductAddPricing
                 @updatePriceSale="updatePriceSale"
                 @updatePrice="updatePrice"
                 @updatePricePerItem="updatePricePerItem"
-              ></Pricing>
+              ></ProductAddPricing>
             </div>
             <div class="inventory block">
               <h5>Inventory</h5>
@@ -76,12 +78,12 @@
                   v-for="(item, index) in typeInventory"
                   :key="index"
                 >
-                  <Inventory
+                  <ProductAddInventory
                     @updatePrice="updatePrice"
                     :typeInventory="item"
                     :indexoption="index"
                     :optionPolicy="optionPolicy"
-                  ></Inventory>
+                  ></ProductAddInventory>
                 </div>
                 <div class="row">
                   <div class="checkbox col-12">
@@ -96,29 +98,28 @@
             </div>
             <div class="shipping block">
               <h5>Shipping</h5>
-              <Shipping></Shipping>
+              <ProductAddShipping></ProductAddShipping>
             </div>
             <div class="variant block">
-              <div class="list-variant">
-                <Variant
-                  class="padding"
+              <div>
+                <ProductAddVariant
                   @getListVariant="getListVariant"
                   @getOptions="getOptions"
-                ></Variant>
+                ></ProductAddVariant>
               </div>
             </div>
           </div>
 
           <div class="info-product-right">
             <div class="block">
-              <ProductAvailability></ProductAvailability>
+              <ProductAddAvailability></ProductAddAvailability>
             </div>
             <div class="block">
-              <Organization
+              <ProductAddOrganization
                 @getCollection="getCollection"
                 @updateVendor="updateVendor"
                 @updateProductType="updateProductType"
-              ></Organization>
+              ></ProductAddOrganization>
             </div>
           </div>
         </div>
@@ -128,13 +129,13 @@
 </template>
 
 <script>
-import UploadImage from "./components/UploadImage";
-import Pricing from "./components/Pricing";
-import Inventory from "./components/Inventory";
-import Shipping from "./components/Shipping";
-import Variant from "./components/Variant";
-import ProductAvailability from "./components/ProductAvailability";
-import Organization from "./components/Organization";
+import ProductAddUploadImage from "../../components/products/ProductAddUploadImage";
+import ProductAddPricing from "../../components/products/ProductAddPricing";
+import ProductAddInventory from "../../components/products/ProductAddInventory";
+import ProductAddShipping from "../../components/products/ProductAddShipping";
+import ProductAddVariant from "../../components/products/ProductAddVariant";
+import ProductAddAvailability from "../../components/products/ProductAddAvailability";
+import ProductAddOrganization from "../../components/products/ProductAddOrganization";
 export default {
   name: "addproduct",
   props: {
@@ -144,13 +145,13 @@ export default {
     },
   },
   components: {
-    UploadImage,
-    Pricing,
-    Inventory,
-    Shipping,
-    Variant,
-    ProductAvailability,
-    Organization,
+    ProductAddUploadImage,
+    ProductAddPricing,
+    ProductAddInventory,
+    ProductAddShipping,
+    ProductAddVariant,
+    ProductAddAvailability,
+    ProductAddOrganization,
   },
   data() {
     return {
@@ -233,6 +234,7 @@ export default {
     },
     saveProduct() {
       this.$emit("saveProduct", this.product);
+      this.$router.push({ path: "/allproducts/tab-all" });
     },
   },
 };
@@ -240,30 +242,61 @@ export default {
 
 <style>
 .block {
-  border: 1px solid #000;
-  padding: 15px 5px;
-  margin: 15px 1px;
-  border-radius: 5px;
+  border: 1px solid rgb(218, 218, 218);
+  padding: 25px 18px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(63, 63, 68, 0.05),
+    0 1px 3px 0 rgba(63, 63, 68, 0.15);
 }
+.block h5 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #363e43;
+}
+.block .header-title-des {
+  margin-top: 5px;
+  margin-bottom: 25px;
+  font-size: 12px;
+}
+/*** add product header ****/
 .add-product {
   width: 100%;
   height: 100%;
+  margin-top: 7.5%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
-.title {
-  font-size: 30px;
-  font-weight: bold;
+.add-product-header {
+  margin-bottom: 5%;
 }
-.previous {
-  margin-top: 60px;
+.add-product-back {
+  margin-bottom: 20px;
 }
+.add-product-back span {
+  padding-right: 10px;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: #9c9c9c;
+}
+.add-product .title {
+  font-size: 31px;
+  font-weight: 900;
+  color: #525c64;
+  margin-top: 5px;
+}
+
+/*     Save Product         **/
 .save-product {
-  width: 75%;
-  background-color: white;
-  border-radius: 8px;
+  background-color: #fff;
+  border-radius: 13px;
   position: fixed;
-  top: 5px;
+  top: 15px;
   z-index: 1000;
-  border: 1px solid #8b8888;
+  width: 71.5%;
+
+  box-shadow: 0 0 0 2px rgba(44, 51, 54, 0.06);
 }
 .save-product .row {
   padding: 5px 0px;
@@ -279,7 +312,16 @@ export default {
   margin: 0px;
   font-size: 18px;
 }
-.btn {
+.btn-save {
+  background-color: #129ff7 !important;
+  color: #fff !important;
+}
+.btn-save:hover,
+.btn-save:active {
+  background-color: #0f96eb !important;
+}
+/*************************/
+.add-product .btn {
   border: 1px solid #a19f9f !important;
   font-size: 15px !important;
 }
@@ -298,13 +340,16 @@ export default {
   border: 1px solid gray;
 }
 
+/******Infor Product**********/
 .info-product .info-product-left {
-  width: 68%;
+  width: 66%;
   float: left;
 }
+
 .info-product .info-product-right {
   width: 30%;
   float: right;
+  margin-right: 2%;
 }
 .pricing .row .col-6 {
   margin: 5px 0;
