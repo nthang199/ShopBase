@@ -63,6 +63,7 @@
         id="formGroupExampleInput"
         v-model="tag"
         @keyup.enter="getTag"
+        @input="updateTags"
       />
       <span v-for="(item, index) in tags" :key="index">
         <p class="pricetag" @click="deleteTag(index)">{{ item }}</p>
@@ -82,7 +83,7 @@ export default {
       ishover2: false,
       vendor: "",
       producttype: "",
-      tags: ["tag1"],
+      tags: [],
       tag: "",
     };
   },
@@ -114,6 +115,10 @@ export default {
     updateProductType(event) {
       this.ishover = !this.ishover;
       this.$emit("updateProductType", event);
+    },
+    updateTags() {
+      this.ishover = !this.ishover;
+      this.$emit("updateTags", this.tags);
     },
     getTag() {
       this.tags.push(this.tag);

@@ -119,6 +119,7 @@
                 @getCollection="getCollection"
                 @updateVendor="updateVendor"
                 @updateProductType="updateProductType"
+                @updateTags="updateTags"
               ></ProductAddOrganization>
             </div>
           </div>
@@ -170,6 +171,7 @@ export default {
         pricePerItem: 0,
         collection: [],
         vendor: "",
+        tags: [],
       },
 
       typeInventory: [
@@ -206,6 +208,10 @@ export default {
       if (!isNaN(parseInt(price))) {
         this.product.pricePerItem = parseInt(price);
       }
+    },
+    updateTags(tags) {
+      this.product.tags = [];
+      this.product.tags = tags;
     },
     filterOptions(string) {
       return string != "";

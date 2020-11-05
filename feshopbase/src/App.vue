@@ -128,6 +128,7 @@ export default {
           pricePerItem: 0,
           collection: [],
           vendor: "",
+          tags: ["T-shit", "Cotton", "Vintage"],
         },
       ],
     };

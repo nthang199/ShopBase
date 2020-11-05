@@ -49,8 +49,11 @@
             </div>
           </div>
           <div class="col-5">
-            <div class="title info">
+            <div class="title ">
               <h2>{{ product.title }}</h2>
+              <div>
+                <p>{{ price }}</p>
+              </div>
             </div>
             <div
               class="option"
@@ -95,6 +98,11 @@
                 alt=""
               />
             </div>
+            <div class="tags-product">
+              <span v-for="(item, index) in product.tags" :key="index">
+                <p class="pricetag">{{ item }}</p>
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -113,6 +121,7 @@ export default {
       optionChoose: [],
       check: true,
       quantity: 1,
+      price: 0,
       productAddToCart: {},
       cart: [],
     };
@@ -176,8 +185,9 @@ export default {
           // console.log(this.productAddToCart.variant);
         }
       }
-
+      this.getPriceItem();
       this.productAddToCart.orderQuantity = this.quantity;
+      this.productAddToCart.orderPrice = this.price;
     },
     addtocart() {
       this.cart.push(this.productAddToCart);
@@ -212,6 +222,19 @@ export default {
       this.quantity += 1;
       this.productAddToCart.orderQuantity = this.quantity;
     },
+    getPriceItem() {
+      let itemChoose = [];
+      for (let index = 0; index < this.optionChoose.length; index++) {
+        itemChoose.push(this.optionChoose[index].value);
+      }
+
+      console.log(itemChoose.join("/"));
+      for (let i = 0; i < this.product.variant.length; i++) {
+        if (itemChoose.join("/") == this.product.variant[i].variant) {
+          this.price = this.product.variant[i].price;
+        }
+      }
+    },
   },
 };
 </script>
@@ -230,17 +253,26 @@ export default {
   /* padding: 0 5% !important; */
   margin: 0% 5% 0% 5%;
 }
-.header-product {
+.details .header-product {
   border: 1px solid #ccc;
   padding: 1% 0px;
 }
-.header-product .col-8,
-.header-product .col-1 {
+.details .title {
+  padding: 20px 2% 0px 2%;
+}
+.details .title p {
+  padding-top: 0;
+  margin: 0;
+  color: #f00;
+  font-size: 25px;
+}
+.details .header-product .col-8,
+.details .header-product .col-1 {
   padding-top: 2%;
 }
 .details-header {
 }
-.details-header li {
+.details .details-header li {
   float: left;
   margin-right: 50px;
   text-transform: uppercase;
@@ -249,54 +281,54 @@ export default {
   color: #666;
   /* padding: ; */
 }
-.details-header li:hover,
-.details-header li:active {
+.details .details-header li:hover,
+.details .details-header li:active {
   color: #333;
   font-weight: 500;
 }
 /* .header-product .row {
   margin: 2% 0px !important;
 } */
-.image img {
+.details .image img {
   width: auto;
   height: 530px;
 }
-.sub-image {
+.details .sub-image {
   margin: 15px 0px;
 }
-.sub-image-item {
+.details .sub-image-item {
   float: left;
 }
-.sub-image img {
+.details .sub-image img {
   width: 170px;
   height: 120px;
   margin-right: 10px;
 }
-.title h2 {
+.details .title h2 {
   padding-bottom: 10px;
   margin: 0 !important;
 }
 .details-content {
   margin-top: 25px;
 }
-.details-content .col-5 {
+.details .details-content .col-5 {
   padding-left: 0;
 }
-.info {
+.details .info {
   margin: 0px 10%;
 }
 
-.option-name {
+.details .option-name {
   margin: 5px 0px 3px 0px;
   font-weight: 500;
 }
-.option {
+.details .option {
   padding: 20px 2%;
 }
-.option p {
+.details .option p {
   margin: 5px 0px;
 }
-.option span {
+.details .option span {
   float: left;
   padding: 3px 12px;
   text-align: center;
@@ -304,7 +336,7 @@ export default {
   text-transform: uppercase;
   border: 1px solid #ccc;
 }
-.optionactive {
+.details .optionactive {
   border: 1px solid rgb(51, 51, 51) !important;
 }
 
@@ -315,24 +347,25 @@ export default {
   width: 120%;
   height: auto;
 }*/
-.cart {
+.details .cart {
   font-size: 25px;
   position: relative;
 }
-.cart span {
+.details .cart span {
   position: absolute;
   left: 40%;
   bottom: 60%;
   color: #f00;
   font-size: 13px;
+  font-weight: 600;
 }
-.input {
+.details .input {
   padding: 7% 2% 6% 2%;
   position: relative;
   /* margin: 7% 0%; */
   margin: 0 !important;
 }
-.btn-custom {
+.details .btn-custom {
   height: 42px;
   width: 30px;
   font-weight: 500;
@@ -342,7 +375,7 @@ export default {
     0 1px 3px 0 rgba(13, 13, 15, 0.15);
 }
 
-.input input {
+.details .input input {
   width: 80px !important;
   padding: 8px 10px 8px 20px;
   display: inline-block;
@@ -351,10 +384,10 @@ export default {
   position: absolute;
   left: 8%;
 }
-input:focus {
+.details input:focus {
   outline: none;
 }
-.btn {
+.details .btn {
   margin: 8px 0 !important;
   display: inline-block !important;
   border: 1px solid #ccc !important;
@@ -367,17 +400,17 @@ input:focus {
   font-weight: 500;
   z-index: 9999;
 }
-.btn-subtract {
+.details .btn-subtract {
   border-radius: 5px 0 0px 5px;
   position: absolute;
   /* left: 10%; */
 }
-.btn-add-quantity {
+.details .btn-add-quantity {
   border-radius: 0px 5px 5px 0px;
   position: absolute;
   left: 20%;
 }
-.add-to-cart {
+.details .add-to-cart {
   border: 1px solid #ccc;
   height: 65px;
   width: 300px;
@@ -394,15 +427,56 @@ input:focus {
   text-transform: uppercase;
   font-weight: 600;
 }
-.add-to-cart:hover,
-.add-to-cart:active {
+.details .add-to-cart:hover,
+.details .add-to-cart:active {
   background-color: #0565d3;
 }
-.method-payment {
+.details .method-payment {
   margin: 1px 2%;
 }
-.method-payment img {
+.details .method-payment img {
   width: 102%;
   height: auto;
+}
+.pricetag {
+  white-space: nowrap;
+  position: relative;
+  margin: 5px 5px 0 10px;
+  display: inline-block;
+  height: 25px;
+  border-radius: 0 5px 5px 0;
+  padding: 0 25px 0 15px;
+  background: #e8edf0;
+  border: 1px solid #c7d2d4;
+  color: rgb(128, 125, 125);
+  line-height: 23px;
+}
+.pricetag:after {
+  position: absolute;
+  right: 0;
+  margin: 1px 7px;
+  font-weight: bold;
+  font-size: 19px;
+  content: "\00D7";
+}
+.pricetag:before {
+  position: absolute;
+  background: #e8edf0;
+  content: "\25CF";
+  color: white;
+  text-shadow: 0 0 1px #aaa;
+  font-size: 12px;
+  line-height: 13px;
+  text-indent: 6px;
+  top: 3px;
+  left: -10px;
+  width: 18px;
+  height: 17px;
+  transform: rotate(45deg);
+  border-left: 1px solid #c7d2d4;
+  border-bottom: 1px solid #c7d2d4;
+}
+.tags-product {
+  margin: 10px 3%;
 }
 </style>
